@@ -31,6 +31,7 @@ app.use('/graphql', cors(), graphqlHTTP({
   schema,
   rootValue: global,
   graphiql: true,
+  port: 3001
 }));
 
 mongoose.connect('mongodb://localhost:27017/books-manager-db',
