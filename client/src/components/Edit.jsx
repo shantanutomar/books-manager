@@ -86,19 +86,19 @@ const Edit = (props) => {
           	}}>
             	<div className="form-group">
             	  <label htmlFor="isbn">ISBN:</label>
-            	  <input type="text" className="form-control" name="isbn" ref={node => {
+            	  <input type="text" className="form-control" autoComplete="off" name="isbn" ref={node => {
             	    isbn = node;
             	  }} placeholder="ISBN" defaultValue={data.book.isbn} />
             	</div>
             	<div className="form-group">
             	  <label htmlFor="title">Title:</label>
-            	  <input type="text" className="form-control" name="title" ref={node => {
+            	  <input type="text" className="form-control" autoComplete="off" name="title" ref={node => {
             	    title = node;
             	  }} placeholder="Title" defaultValue={data.book.title} />
             	</div>
             	<div className="form-group">
             	  <label htmlFor="author">Author:</label>
-            	  <input type="text" className="form-control" name="author" ref={node => {
+            	  <input type="text" className="form-control" autoComplete="off" name="author" ref={node => {
             	    author = node;
             	  }} placeholder="Author" defaultValue={data.book.author} />
             	</div>
@@ -110,13 +110,13 @@ const Edit = (props) => {
             	</div>
             	<div className="form-group">
             	  <label htmlFor="author">Publisher:</label>
-            	  <input type="text" className="form-control" name="publisher" ref={node => {
+            	  <input type="text" className="form-control" autoComplete="off" name="publisher" ref={node => {
             	    publisher = node;
             	  }} placeholder="Publisher" defaultValue={data.book.publisher} />
             	</div>
             	<div className="form-group">
             	  <label htmlFor="author">Published Year:</label>
-            	  <input type="number" className="form-control" name="published_year" ref={node => {
+            	  <input type="number" className="form-control" autoComplete="off" name="published_year" ref={node => {
             	    published_year = node;
             	  }} placeholder="Published Year" defaultValue={data.book.published_year} />
             	</div>
