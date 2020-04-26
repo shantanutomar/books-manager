@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { withRouter } from 'react-router'
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 const GET_BOOKS = gql`
   {
@@ -14,47 +15,41 @@ const GET_BOOKS = gql`
   }
 `;
 
-class App extends Component {
-  render() {
-    return (
-      <Query pollInterval={500} query={GET_BOOKS}>
-        {({ loading, error, data }) => {
-		if (loading) return 'Loading...';
-        	if (error) return `Error! ${error.message}`;	
-			return (
-        	  <div className="container">
-        	    <div className="panel panel-default">
-        	      <div className="panel-heading">
-        	        <h3 className="panel-title">
-        	          LIST OF BOOKS
-        	        </h3>
-        	        <h4><Link to="/create">Add Book</Link></h4>
-        	      </div>
-        	      <div className="panel-body">
-        	        <table className="table table-stripe">
-        	          <thead>
-        	            <tr>
-        	              <th>Title</th>
-        	              <th>Author</th>
-        	            </tr>
-        	          </thead>
-        	          <tbody>
-        	            {data.books.map((book, index) => (
-        	              <tr key={index}>
-        	                <td><Link to={`/show/${book._id}`}>{book.title}</Link></td>
-        	                <td>{book.author}</td>
-        	              </tr>
-        	            ))}
-        	          </tbody>
-        	        </table>
-        	      </div>
-        	    </div>
-        	  </div>
-        	);
-        }}
-      </Query>  
-    );
-  }
+const App = () => {
+	const { loading, error, data } = useQuery(GET_BOOKS);
+	if (loading) return 'Loading...';
+	if (error) return `Error! ${error.message}`;
+	return (
+    <div className="container">
+      <div className="panel panel-default">
+        <div className="panel-heading" style={{'display': 'flex', 'justifyContent': 'space-between'}}>
+          <h3 className="panel-title">
+            LIST OF BOOKS
+          </h3>
+          <h4><Link to="/create" className="btn btn-success">Add Book</Link></h4>
+        </div>
+        <div className="panel-body" style={{'marginTop': '55px'}}>
+				{data.books.length ? <table className="table table-stripe">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.books.map((book, index) => (
+                <tr key={index}>
+                  <td><Link to={`/show/${book._id}`}>{book.title}</Link></td>
+                  <td>{book.author}</td>
+                </tr>
+              ))}
+            </tbody>
+        	</table> : <h4 style={{'color': 'red', 'textAlign': "center"}}>No books available. Please add a Book!!</h4>
+				}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App;
+export default withRouter(App);
