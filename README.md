@@ -4,6 +4,8 @@ This application allows a user to add new books, show, update and delete existin
 
 The application consists of Web client made in React along with a Express based API server. The server interacts with data layer in form of a MongoDB instance. The GraphQL query language API is also being used to provide seamless and cached data to React Client.  
 
+The project demo can be seen here-> https://www.youtube.com/watch?v=-UX_HuhWtpM
+
 ### Setting Up and Running
 
 - Clone the  [repository](https://github.com/shantanutomar/books-manager.git).
